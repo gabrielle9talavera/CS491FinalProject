@@ -8,6 +8,7 @@ pipeline {
                 }
             }
             steps {
+                export PYTHONPATH=$WORKSPACE:$PYTHONPATH
                 sh 'python -m py_compile sources/Node.py sources/NodeFailure.py sources/Path.py sources/sim.py' 
                 stash(name: 'compiled-results', includes: 'sources/*.py*') 
             }

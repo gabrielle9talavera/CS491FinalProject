@@ -1,4 +1,5 @@
-import unittest, mock
+import unittest
+from unittest import mock
 from Node import Node
 
 

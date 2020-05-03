@@ -10,9 +10,6 @@ pipeline {
             steps {
                 sh 'python -m py_compile sources/Node.py sources/NodeFailure.py sources/Path.py sources/sim.py' 
                 stash(name: 'compiled-results', includes: 'sources/*.py*') 
-                sh 'sudo -H pip install networkx'
-                sh 'sudo -H pip install numpy'
-                sh 'sudo -H pip install mock'
             }
         }
         stage('Test') {
@@ -22,6 +19,9 @@ pipeline {
                 }
             }
             steps {
+                sh 'pip install networkx'
+                sh 'pip install numpy'
+                sh 'pip install mock'
                 sh 'py.test --junit-xml test-reports/results.xml sources/PathTest.py'
             }
             post {

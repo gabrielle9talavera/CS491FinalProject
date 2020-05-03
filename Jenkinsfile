@@ -10,10 +10,10 @@ pipeline {
             steps {
                 sh 'python -m py_compile sources/Node.py sources/NodeFailure.py sources/Path.py sources/sim.py' 
                 stash(name: 'compiled-results', includes: 'sources/*.py*') 
-                sh 'python -m pip install --user --upgrade pip'
-                sh 'python -m pip install --user networkx'
-                sh 'python -m pip install --user numpy'
-                sh 'python -m pip install --user mock'
+                sh 'pip install --user --upgrade pip'
+                sh 'pip install --user networkx'
+                sh 'pip install --user numpy'
+                sh 'pip install --user mock'
             }
         }
         stage('Test') {

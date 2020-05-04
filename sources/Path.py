@@ -1,5 +1,4 @@
 import networkx as nx
-from NodeFailure import NodeFailure
 
 
 class Path(object):
@@ -9,6 +8,9 @@ class Path(object):
         self.path = []
         self.dpath = []
         self.bfpath = []
+        self.cost = 0
+        self.bfcost = 0
+        self.dcost = 0
 
     # this finds the shortest path using the Floyd-Warshall function which was imported from networkx
     # if you want to compare Floyd-Warshall with Dijkstra's uncomment lines: 107, 112, 122
@@ -41,6 +43,15 @@ class Path(object):
         # finds the new shortest path
         self.find_path(graph, src, dest)
 
+    # gets the total cost of path
+    def get_cost(self, graph, src, dest):
+        edges = 0
+        for i in range(1, len(self.path)):
+            edges += graph.edges[self.path[i - 1], self.path[i]]['weight']
+        self.cost = edges
+        self.dcost = nx.dijkstra_path_length(graph, src, dest)
+        self.bfcost = nx.bellman_ford_path_length(graph, src, dest)
+
     def print_path(self, graph, src, dest):
         if not self.path:
             # Print to the terminal if no path exists.
@@ -58,12 +69,9 @@ class Path(object):
             # print("Bellman-Ford Number of Hops:", len(self.bfpath)-1)
 
             # gets the total cost
-            edge = 0
-            for i in range(1, len(self.path)):
-                edge += graph.edges[self.path[i - 1], self.path[i]]['weight']
-            dpathcost = nx.dijkstra_path_length(graph, src, dest)
-            bfpathcost = nx.bellman_ford_path_length(graph, src, dest)
-            print("Total Cost:", edge)
-            # print("Dijkstra's Total Cost:", dpathcost)
-            # print("Bellman-Ford Total Cost:", bfpathcost)
+            self.get_cost(graph, src, dest)
+
+            print("Total Cost:", self.cost)
+            # print("Dijkstra's Total Cost:", self.dcost)
+            # print("Bellman-Ford Total Cost:", self.bfcost)
             print()

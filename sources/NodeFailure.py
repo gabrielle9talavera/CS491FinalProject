@@ -22,20 +22,18 @@ class NodeFailure(object):
 
     # this is to calculate which nodes are failing
     # parameters: nodeAmount = amount of nodes
-    #            nodeProbs = probabilities that were assigned to each node to fail
-    #            failProb = the probabily of node failure based on user input
     #            src = starting node
     #            dest = ending node
     # returns a list of the nodes that failed
     def calculate_failure(self, node_amount, src):
         # calculates the amount of nodes that can fail
-        failAmount = round(self.fail_prob / (1 / node_amount))
+        fail_amount = round(self.fail_prob / (1 / node_amount))
 
         # this randomly generates the nodes that could fail
-        holder = {random.randint(0, node_amount) for x in range(0, failAmount)}
+        holder = {random.randint(0, node_amount) for x in range(0, fail_amount)}
 
         # this goes through the nodes that could fail and if their probability is lower than the failProb, then the node
         # will be added to the fail list
         for x in holder:
-            if self.node_probs[x-1] < self.fail_prob and x != src:  # and x != dest:
+            if self.node_probs[x-1] < self.fail_prob and x != src:
                 self.failure.append(x)

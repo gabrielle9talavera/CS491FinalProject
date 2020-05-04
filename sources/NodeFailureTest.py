@@ -30,6 +30,12 @@ class TestNodeFailureMethods(unittest.TestCase):
         self.node_fail.calculate_failure(5, 2)
         self.assertEqual(self.node_fail.failure, [])
 
+    def test_calculate_failure_zero_prob(self):
+        self.node_fail.fail_prob = 0
+        self.node_fail.node_probs = [.5, .6, .3, .7, .4]
+        self.node_fail.calculate_failure(5, 2)
+        self.assertEqual(self.node_fail.failure, [])
+
     def test_calculate_failure_high_prob(self):
         self.node_fail.fail_prob = .8
         self.node_fail.node_probs = [.2, .3, .1, .4, .5]
@@ -39,4 +45,3 @@ class TestNodeFailureMethods(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
-

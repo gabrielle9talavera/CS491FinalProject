@@ -27,4 +27,3 @@ class Node(object):
         while self.dest > (node_amount - 1) or self.dest < 0:
             text = input("Enter destination node (possible values from 0 to the number of nodes - 1): ")
             self.dest = int(text)
-

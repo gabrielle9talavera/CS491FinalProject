@@ -25,7 +25,6 @@
 ######################################################################################################################
 import networkx as nx
 import random
-import numpy as np
 from Node import Node
 from NodeFailure import NodeFailure
 from Path import Path
@@ -40,12 +39,12 @@ class Sim(object):
     # this generates the graph
     # Parameters: n = node amount (based on user input)
     # returns the graph (network)
-    def generateGraph(self, n):
+    def generate_graph(self, n):
         # finds the max amount of edges that can exist
-        maxEdges = (n * (n - 1)) / 2
+        max_edges = (n * (n - 1)) / 2
 
         # based on the max amount of edges, it randomizes a number of edges that our graph will have
-        e = random.randint(n, maxEdges)
+        e = random.randint(n, max_edges)
 
         # this generates a random graph using the amount of nodes and edges
         g = nx.gnm_random_graph(n, e)
@@ -67,7 +66,7 @@ class Sim(object):
         self.node_fail.find_node_probs(self.node.n)
 
         # generates the graph
-        g = self.generateGraph(self.node.n)
+        g = self.generate_graph(self.node.n)
 
         # # finds the shortest path
         self.path.find_path(g, self.node.src, self.node.dest)
@@ -89,6 +88,7 @@ class Sim(object):
                 self.path.update(g, self.node.n, self.node.src, self.node.dest)
                 print("Nodes that failed: ", self.node_fail.failure)
                 self.path.print_path(g, self.node.src, self.node.dest)
+
 
 if __name__ == "__main__":
     sim = Sim()

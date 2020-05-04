@@ -34,7 +34,7 @@ class TestNodeMethods(unittest.TestCase):
 
     @mock.patch('Node.input', create=True)
     def test_dest_node_out_range(self, mocked_input):
-        mocked_input.side_effect = [8,-1, 2]
+        mocked_input.side_effect = [8, -1, 2]
         self.node.dest_node(8)
         self.assertEqual(self.node.dest, 2)
 

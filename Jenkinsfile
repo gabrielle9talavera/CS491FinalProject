@@ -15,7 +15,7 @@ pipeline {
                 // sh 'sudo -H pip3 install networkx'
                 // sh 'sudo -H pip3 install numpy'
                 sh 'export PYTHONPATH=$WORKSPACE:$PYTHONPATH'
-                sh 'pip3 install networkx --user'
+                sh 'sudo -H ython3 -m pip install networkxr'
                 sh 'python3 -m py_compile sources/Node.py sources/NodeFailure.py sources/Path.py sources/sim.py' 
                 stash(name: 'compiled-results', includes: 'sources/*.py*') 
             }

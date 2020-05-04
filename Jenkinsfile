@@ -4,15 +4,16 @@ pipeline {
         stage('Build') { 
             agent {
                 docker {
-                    image 'python:3.8-slim-buster' 
+                    image 'python:3' 
                 }
             }
             steps {
-                sh 'python -m py_compile sources/Node.py sources/NodeFailure.py sources/Path.py sources/sim.py' 
-                stash(name: 'compiled-results', includes: 'sources/*.py*') 
+                sh 'pip3 install --upgrade pip'
                 sh 'pip3 install networkx'
                 sh 'pip3 install numpy'
                 sh 'pip3 install mock'
+                sh 'python -m py_compile sources/Node.py sources/NodeFailure.py sources/Path.py sources/sim.py' 
+                stash(name: 'compiled-results', includes: 'sources/*.py*') 
             }
         }
         stage('Test') {

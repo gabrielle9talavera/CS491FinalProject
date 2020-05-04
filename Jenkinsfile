@@ -1,12 +1,14 @@
 pipeline {
-    agent none 
+    agent {docker {
+                    image 'python:3.8-slim-buster' 
+                } }
     stages {
         stage('Build') { 
-            agent {
-                docker {
-                    image 'python:3.8-slim-buster' 
-                }
-            }
+            // agent {
+            //     docker {
+            //         image 'python:3.8-slim-buster' 
+            //     }
+            // }
             steps {
                 // // sh 'sudo -H pip3 install mock'
                 // sh 'sudo -H pip3 install --upgrade pip'

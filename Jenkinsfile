@@ -23,7 +23,8 @@ pipeline {
                 }
             }
             steps {
-                sh 'pip3 install netowrkx'
+                sh 'sudo -H pip3 install --upgrade pip'
+                sh 'pip3 install networkx'
                 sh 'py.test --junit-xml test-reports/results.xml sources/PathTest.py'
             }
             post {

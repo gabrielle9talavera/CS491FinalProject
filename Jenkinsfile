@@ -23,6 +23,7 @@ pipeline {
                 }
             }
             steps {
+                sh 'pip3 install netowrkx'
                 sh 'py.test --junit-xml test-reports/results.xml sources/PathTest.py'
             }
             post {

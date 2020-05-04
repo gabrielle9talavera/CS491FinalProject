@@ -8,10 +8,10 @@ pipeline {
                 }
             }
             steps {
-                sh 'pip3 --no-cache-dir install --upgrade pip'
-                sh 'pip3 --no-cache-dir install networkx'
-                sh 'pip3 --no-cache-dir install numpy'
-                sh 'pip3 --no-cache-dir install mock'
+                // sh 'sudo -H pip3 install mock'
+                sh 'sudo -H pip3 install --upgrade pip'
+                sh 'sudo -H pip3 install networkx'
+                sh 'sudo -H pip3 install numpy'
                 sh 'python -m py_compile sources/Node.py sources/NodeFailure.py sources/Path.py sources/sim.py' 
                 stash(name: 'compiled-results', includes: 'sources/*.py*') 
             }

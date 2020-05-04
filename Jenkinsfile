@@ -15,9 +15,9 @@ pipeline {
                 // sh 'sudo -H pip3 install networkx'
                 // sh 'sudo -H pip3 install numpy'
                 sh 'export PYTHONPATH=$WORKSPACE:$PYTHONPATH'
-                sh 'python3 -m venv env'
-                sh 'source ./env/bin/activate'
-                sh 'python -m pip install --user networkx'
+                sh 'virtualenv environment_name -p python3'
+                sh 'source environment_name/bin/activate'
+                sh "pip installnetworkx'
                 sh 'python3 -m py_compile sources/Node.py sources/NodeFailure.py sources/Path.py sources/sim.py' 
                 stash(name: 'compiled-results', includes: 'sources/*.py*') 
             }

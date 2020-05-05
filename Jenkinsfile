@@ -29,7 +29,7 @@ pipeline {
                 // sh 'pip3 install --upgrade pip'
                 // sh 'pip3 install networkx'
                 // sh 'py.test --junit-xml test-reports/results.xml sources/PathTest.py'
-                sh 'virtualenv venv && . venv/bin/activate && pip install networkx  && pip install numpy && python3 sources/PathTest.py'
+                sh 'virtualenv -p python3.8 venv && . venv/bin/activate && pip install networkx && pip install numpy && python sources/PathTest.py'
             }
             post {
                 always {

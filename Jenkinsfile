@@ -28,14 +28,14 @@ pipeline {
             steps {
                 // sh 'pip3 install --upgrade pip'
                 // sh 'pip3 install networkx'
-                sh 'virtualenv venv && . venv/bin/activate && pip install pytest && pip install networkx && pip install numpy && pip install mock && python3 sources/NodeTest.py && python3 sources/PathTest.py '
+                sh 'virtualenv venv && . venv/bin/activate && pip install pytest && pip install networkx && pip install numpy && pip install mock && python3 sources/NodeTest.py && python3 sources/PathTest.py && python3 sources/NodeFailureTest.py && python3 sources/IntegrationTests.py'
                 // sh 'python3 -m pytest --junit-xml test-reports/results.xml sources/NodeTest.py'
             }
-            post {
-                always {
-                    junit 'test-reports/*.xml'
-                }
-            }
+            // post {
+            //     always {
+            //         junit 'test-reports/*.xml'
+            //     }
+            // }
         }
     }
 }

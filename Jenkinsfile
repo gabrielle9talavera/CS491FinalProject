@@ -8,13 +8,6 @@ pipeline {
                 }
             }
             steps {
-                // // sh 'sudo -H pip3 install mock'
-                // sh 'sudo -H pip3 install --upgrade pip'
-                // sh 'sudo -H pip3 install networkx'
-                // sh 'sudo -H pip3 install numpy'
-                // sh 'export PYTHONPATH=$WORKSPACE:$PYTHONPATH'
-                // sh 'pip3 install -e ./networkx'
-                // sh 'pip3 install -e ./numpy'
                 sh 'python -m py_compile sources/Node.py sources/NodeFailure.py sources/Path.py sources/sim.py' 
                 stash(name: 'compiled-results', includes: 'sources/*.py*') 
             }
@@ -26,16 +19,14 @@ pipeline {
                 }
             }
             steps {
-                // sh 'pip3 install --upgrade pip'
-                // sh 'pip3 install networkx'
                 sh 'virtualenv venv && . venv/bin/activate && pip install pytest && pip install networkx && pip install numpy && pip install mock && python3 sources/NodeTest.py && python3 sources/PathTest.py && python3 sources/NodeFailureTest.py && python3 sources/IntegrationTests.py'
                 // sh 'python3 -m pytest --junit-xml test-reports/results.xml sources/NodeTest.py'
             }
-            // post {
-            //     always {
-            //         junit 'test-reports/*.xml'
-            //     }
-            // }
+            post {
+                always {
+                    junit 'test-reports/*.xml'
+                }
+            }
         }
     }
 }

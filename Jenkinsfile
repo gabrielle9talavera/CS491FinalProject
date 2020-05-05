@@ -18,8 +18,8 @@ pipeline {
                 // sh 'virtualenv venv --distrubute'
                 // sh '. venv/bin/activate'
                 // sh 'pip install networkx'
-                // sh 'python3 -m py_compile sources/Node.py sources/NodeFailure.py sources/Path.py sources/sim.py' 
-                // stash(name: 'compiled-results', includes: 'sources/*.py*') 
+                sh 'python3 -m py_compile sources/Node.py sources/NodeFailure.py sources/Path.py sources/sim.py' 
+                stash(name: 'compiled-results', includes: 'sources/*.py*') 
             }
         }
         stage('Test') {

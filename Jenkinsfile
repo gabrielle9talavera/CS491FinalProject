@@ -28,7 +28,7 @@ pipeline {
             steps {
                 // sh 'pip3 install --upgrade pip'
                 // sh 'pip3 install networkx'
-                // sh 'virtualenv venv && . venv/bin/activate && pip install networkx && pip install numpy && pip install mock && python sources/NodeTest.py'
+                sh 'virtualenv venv && . venv/bin/activate && pip install py.test && pip install networkx && pip install numpy && pip install mock && python3 sources/NodeTest.py'
                 sh 'py.test --junit-xml test-reports/results.xml sources/NodeTest.py'
             }
             post {

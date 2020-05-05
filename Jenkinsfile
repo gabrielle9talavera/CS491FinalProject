@@ -15,9 +15,11 @@ pipeline {
                 // sh 'sudo -H pip3 install networkx'
                 // sh 'sudo -H pip3 install numpy'
                 sh 'export PYTHONPATH=$WORKSPACE:$PYTHONPATH'
-                sudo -H python3 -m pip install networkx
-                sh 'python3 -m py_compile sources/Node.py sources/NodeFailure.py sources/Path.py sources/sim.py' 
-                stash(name: 'compiled-results', includes: 'sources/*.py*') 
+                sh 'virtualenv venv --distrubute'
+                sh '. venv/bin/activate'
+                sh 'pip install networkx'
+                // sh 'python3 -m py_compile sources/Node.py sources/NodeFailure.py sources/Path.py sources/sim.py' 
+                // stash(name: 'compiled-results', includes: 'sources/*.py*') 
             }
         }
         stage('Test') {

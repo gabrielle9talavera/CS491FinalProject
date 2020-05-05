@@ -9,7 +9,7 @@ pipeline {
             //     docker {
             //         image 'python:3.8-slim-buster' 
             //     }
-            }
+            //}
             steps {
                 // // sh 'sudo -H pip3 install mock'
                 // sh 'sudo -H pip3 install --upgrade pip'

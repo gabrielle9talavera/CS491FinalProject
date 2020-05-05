@@ -1,15 +1,12 @@
 pipeline {
-    agent { docker {
-                    image 'python:3.8-slim-buster' 
-                }
-            }   
+    agent none
     stages {
         stage('Build') { 
-            // agent {
-            //     docker {
-            //         image 'python:3.8-slim-buster' 
-            //     }
-            //}
+            agent {
+                docker {
+                    image 'python:3.8-slim-buster' 
+                }
+            }
             steps {
                 // // sh 'sudo -H pip3 install mock'
                 // sh 'sudo -H pip3 install --upgrade pip'
@@ -23,16 +20,16 @@ pipeline {
             }
         }
         stage('Test') {
-            // agent {
-            //     docker {
-            //         image 'qnib/pytest'
-            //     }
-            // }
+            agent {
+                docker {
+                    image 'qnib/pytest'
+                }
+            }
             steps {
                 // sh 'pip3 install --upgrade pip'
                 // sh 'pip3 install networkx'
                 // sh 'py.test --junit-xml test-reports/results.xml sources/PathTest.py'
-                sh 'virtualenv venv && . venv/bin/activate && pip install networkx && pip install numpy && python3 sources/PathTest.py'
+                sh 'virtualenv venv && . venv/bin/activate && pip install networkx && pip install numpy && python sources/PathTest.py'
             }
             post {
                 always {
